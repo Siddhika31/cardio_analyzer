@@ -81,7 +81,7 @@ if submit_button:
     # Sex
     input_dict['Sex'] = 1 if sex=='Male' else 0
 
-    # One-hot for categorical
+    # One-hot for categorical features
     input_dict[f'General_Health_{general_health}'] = 1
     input_dict[f'Checkup_{checkup}'] = 1
     input_dict['Exercise_Yes'] = 1 if exercise=='Yes' else 0
@@ -89,7 +89,12 @@ if submit_button:
     input_dict['Skin_Cancer_Yes'] = 1 if skin_cancer=='Yes' else 0
     input_dict['Other_Cancer_Yes'] = 1 if other_cancer=='Yes' else 0
     input_dict['Depression_Yes'] = 1 if depression=='Yes' else 0
-    input_dict[f'Diabetes_{diabetes}'] = 1
+    diabetes_map = {
+        "No, pre-diabetes or borderline diabetes": "Diabetes_No, pre-diabetes or borderline diabetes",
+        "Yes": "Diabetes_Yes",
+        "Yes, but female told only during pregnancy": "Diabetes_Yes, but female told only during pregnancy"
+    }
+    input_dict[diabetes_map[diabetes]] = 1
     input_dict['Arthritis_Yes'] = 1 if arthritis=='Yes' else 0
     input_dict[f'Age_Category_{age_cat}'] = 1
     input_dict['Smoking_History_Yes'] = 1 if smoking=='Yes' else 0
@@ -108,9 +113,14 @@ if submit_button:
         except Exception as e:
             st.warning(f"{name}: Prediction failed. Error: {e}")
 
-    # Final Ensemble Decision
-    high_risk_votes = list(pred for pred in predictions.values() if pred=="⚠️ High Risk")
-    if len(high_risk_votes) >= 3:
+    # ---------------- Numeric-based Risk Override ----------------
+    numeric_risk = False
+    if bmi > 35 or alcohol > 20 or exercise=="No":
+        numeric_risk = True
+
+    # ---------------- Final Risk Assessment ----------------
+    high_risk_votes = list(v for v in predictions.values() if v=="⚠️ High Risk")
+    if len(high_risk_votes) >= 3 or numeric_risk:
         st.subheader("🏁 Final Risk Assessment: ⚠️ High Risk")
     else:
         st.subheader("🏁 Final Risk Assessment: ✅ Low Risk")
