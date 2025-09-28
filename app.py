@@ -1,22 +1,31 @@
 import streamlit as st
-import numpy as np
 import joblib
+import os
+import numpy as np
 import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Cardio Care Analyzer", layout="wide")
-
 st.title("🩺 Cardio Care Analyzer")
 st.write("Enter your health details below for cardiovascular risk prediction.")
 
 # ---------------- Load Models ----------------
-models = {
-    "Logistic Regression": joblib.load("models/logistic_regression_model.pkl"),
-    "Decision Tree": joblib.load("models/decision_tree_model.pkl"),
-    "Neural Network": joblib.load("models/neural_network_model.pkl"),
-    "Random Forest": joblib.load("models/random_forest_model.pkl"),
-    "XGBoost": joblib.load("models/xgboost_model.pkl"),
-    "Voting Ensemble": joblib.load("models/voting_ensemble.pkl")
+if not os.path.exists("models"):
+    os.mkdir("models")
+
+# Make sure your models are inside 'models/' folder
+model_files = {
+    "logistic_regression_model.pkl": "Logistic Regression",
+    "decision_tree_model.pkl": "Decision Tree",
+    "neural_network_model.pkl": "Neural Network",
+    "random_forest_model.pkl": "Random Forest",
+    "xgboost_model.pkl": "XGBoost",
+    "voting_ensemble.pkl": "Voting Ensemble"
 }
+
+models = {}
+for file, name in model_files.items():
+    path = os.path.join("models", file)
+    models[name] = joblib.load(path)
 
 # ---------------- Input Form ----------------
 with st.form(key="health_form"):
@@ -49,9 +58,8 @@ with st.form(key="health_form"):
 
 # ---------------- Predictions ----------------
 if submit_button:
-    # ---- Prepare input features ----
-    # NOTE: Replace this placeholder with your proper preprocessing pipeline (encoding)
-    input_features = np.array([[bmi, alcohol, fruit, veg, fried]])  # numeric features example
+    # NOTE: Replace this with your actual preprocessing for models
+    input_features = np.array([[bmi, alcohol, fruit, veg, fried]])  # Placeholder
 
     st.subheader("🔮 Model Predictions")
     predictions = {}
@@ -62,16 +70,16 @@ if submit_button:
             predictions[name] = risk
             st.write(f"{name}: {risk}")
         except:
-            st.warning(f"{name}: Prediction failed. Check input preprocessing.")
+            st.warning(f"{name}: Prediction failed. Check preprocessing.")
 
-    # ---- Final Ensemble Decision ----
+    # Final Ensemble Decision
     high_risk_votes = list(pred for pred in predictions.values() if pred=="⚠️ High Risk")
     if len(high_risk_votes) >= 3:
         st.subheader("🏁 Final Risk Assessment: ⚠️ High Risk")
     else:
         st.subheader("🏁 Final Risk Assessment: ✅ Low Risk")
 
-    # ---- Personalized Recommendations ----
+    # Health Recommendations
     st.subheader("💡 Health Recommendations")
     if bmi > 30:
         st.write("⚠️ High BMI detected. Increase physical activity and maintain a balanced diet.")
@@ -84,7 +92,7 @@ if submit_button:
     if bmi <= 30 and smoking != "Current" and alcohol <=14 and exercise=="Yes":
         st.success("✅ Your lifestyle appears healthy. Keep it up!")
 
-    # ---- Visualizations ----
+    # Visualization
     st.subheader("📊 Health Metrics Overview")
     fig, ax = plt.subplots()
     ax.bar(["BMI","Alcohol","Fruit","Vegetables","Fried Potatoes"], [bmi, alcohol, fruit, veg, fried],
