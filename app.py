@@ -5,7 +5,7 @@ import pandas as pd
 
 # ============== PAGE CONFIG ==============
 st.set_page_config(
-    page_title="Cardio Care AI - Heart Health Analyzer",
+    page_title="Cardio Care Analyzer - Heart Health Analyzer",
     page_icon="❤️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -119,7 +119,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ============== HEADER ==============
-st.markdown('<h1 class="main-title">❤️ Cardio Care AI</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-title">❤️ Cardio Care Analyzer </h1>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle">Advanced Heart Health Risk Assessment System</p>', unsafe_allow_html=True)
 
 # ============== MODEL ACCURACIES ==============
@@ -623,9 +623,10 @@ st.divider()
 st.markdown("""
     <div style='text-align: center; padding: 20px; color: white;'>
         <p style='font-size: 0.9rem;'>
-            💙 <b>Cardio Care AI</b> - Your Personal Heart Health Assistant<br>
+            💙 <b>Cardio Care Analyzer</b> - Your Personal Heart Health Assistant<br>
     "Developed as part of MCA Final Year Project by Siddhika Belsare  Supervised by Prof. Shubhangi Mahadik"
         </p>
     </div>
 """, unsafe_allow_html=True)
+
 
