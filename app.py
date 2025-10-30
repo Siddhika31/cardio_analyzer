@@ -45,6 +45,12 @@ st.markdown("""
         border-radius: 20px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
+
+    /* Make form labels inside white box black and bold */
+    div.stForm label {
+        color: black !important;
+        font-weight: bold;
+    }
     
     /* Metric cards */
     .metric-card {
@@ -143,13 +149,13 @@ with st.sidebar:
     
     st.divider()
     
-    st.markdown("<h4 style='color:black; font-weight:bold;'>🏆 Model Performance</h4>", unsafe_allow_html=True)
+    st.subheader("🏆 Model Performance")
     for model, acc in model_accuracies.items():
         st.progress(acc/100, text=f"{model}: {acc}%")
     
     st.divider()
     
-    st.markdown("<h4 style='color:black; font-weight:bold;'>ℹ️ About</h4>", unsafe_allow_html=True)
+    st.subheader("ℹ️ About")
     st.info("""
     **Cardio Care AI** uses advanced machine learning algorithms to predict cardiovascular disease risk.
     
@@ -165,7 +171,7 @@ with st.sidebar:
     st.caption("💙 Made with Streamlit | Version 2.0")
 
 # ============== MAIN FORM ==============
-st.markdown("<h3 style='color:black; font-weight:bold;'>📝 Enter Your Health Information</h3>", unsafe_allow_html=True)
+st.markdown("### 📝 Enter Your Health Information")
 
 with st.form(key="health_form"):
     # Create tabs for better organization
@@ -244,92 +250,13 @@ with st.form(key="health_form"):
             use_container_width=True
         )
 
-# ============== RISK CALCULATION ==============
-def calculate_risk_score(bmi, smoking, alcohol, exercise, heart_disease, diabetes, 
-                        general_health, age_cat, fruit, veg, fried):
-    risk_score = 0
-    if bmi > 35:
-        risk_score += 3
-    elif bmi > 30:
-        risk_score += 2
-    elif bmi > 25:
-        risk_score += 1
-    if smoking == "Current":
-        risk_score += 3
-    elif smoking == "Former":
-        risk_score += 1
-    if alcohol > 21:
-        risk_score += 2
-    elif alcohol > 14:
-        risk_score += 1
-    if exercise == "No":
-        risk_score += 2
-    if heart_disease == "Yes":
-        risk_score += 3
-    if diabetes == "Yes":
-        risk_score += 2
-    health_scores = {"Poor": 3, "Fair": 2, "Good": 1, "Very Good": 0, "Excellent": 0}
-    risk_score += health_scores.get(general_health, 0)
-    age_risk = {"18-24": 0, "25-29": 0, "30-34": 0, "35-39": 0, "40-44": 1,
-                "45-49": 1, "50-54": 2, "55-59": 2, "60-64": 3, "65-69": 3,
-                "70-74": 4, "75-79": 4, "80+": 5}
-    risk_score += age_risk.get(age_cat, 0)
-    if fruit < 2:
-        risk_score += 1
-    if veg < 2:
-        risk_score += 1
-    if fried > 3:
-        risk_score += 1
-    return risk_score
-
-# ============== PREDICTIONS SECTION ==============
-if submit_button:
-    # Show loading animation
-    with st.spinner('🔄 Analyzing your health data...'):
-        import time
-        time.sleep(1.5)
-    
-    risk_score = calculate_risk_score(bmi, smoking, alcohol, exercise, heart_disease, 
-                                      diabetes, general_health, age_cat, fruit, veg, fried)
-    
-    base_prediction = 1 if risk_score >= 8 else 0
-    
-    st.success("✅ Analysis Complete!")
-    st.divider()
-    
-    st.markdown("<h3 style='color:black; font-weight:bold;'>📊 Your Risk Score</h3>", unsafe_allow_html=True)
-    col1, col2, col3 = st.columns([1,2,1])
-    
-    with col2:
-        risk_percentage = min(100, (risk_score / 20) * 100)
-        st.progress(risk_percentage/100)
-        if risk_score < 5:
-            risk_level = "Low Risk"
-            risk_color = "🟢"
-        elif risk_score < 8:
-            risk_level = "Moderate Risk"
-            risk_color = "🟡"
-        else:
-            risk_level = "High Risk"
-            risk_color = "🔴"
-        st.markdown(f"<h2 style='text-align: center;'>{risk_color} {risk_level}</h2>", 
-                   unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center; font-size: 1.2rem;'>Risk Score: {risk_score}/20</p>", 
-                   unsafe_allow_html=True)
-    
-    st.divider()
-    
-    st.markdown("<h3 style='color:black; font-weight:bold;'>🤖 AI Model Predictions</h3>", unsafe_allow_html=True)
-    # … continue all other sections as before, just replace Markdown headings with:
-    # st.markdown("<h3 style='color:black; font-weight:bold;'>…</h3>", unsafe_allow_html=True)
-    
 # ============== FOOTER ==============
 st.divider()
 st.markdown("""
     <div style='text-align: center; padding: 20px; color: white;'>
         <p style='font-size: 0.9rem;'>
             💙 <b>Cardio Care Analyzer</b> - Your Personal Heart Health Assistant<br>
-   Developed as part of MCA Final Year Project by  Siddhika Belsare  Supervised by Prof. Shubhangi Mahadik
+            Developed as part of MCA Final Year Project by Siddhika Belsare  Supervised by Prof. Shubhangi Mahadik
         </p>
     </div>
 """, unsafe_allow_html=True)
