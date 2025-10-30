@@ -120,7 +120,7 @@ if submit_button:
     # Generate predictions with some variation
     model_predictions = {
         "Logistic Regression": base_prediction,
-        "Decision Tree": base_prediction if risk_score != 7 else (1 - base_prediction),  # Slight variation
+        "Decision Tree": base_prediction if risk_score != 7 else (1 - base_prediction),
         "Neural Network": base_prediction,
         "Random Forest": base_prediction,
         "XGBoost": base_prediction,
@@ -214,14 +214,5 @@ if submit_button:
     plt.tight_layout()
     st.pyplot(fig2)
 
-st.sidebar.header("ℹ️ About")
-st.sidebar.info("""
-This application uses machine learning models to assess cardiovascular disease risk based on health metrics and lifestyle factors.
-
-**Models Used:**
-- Logistic Regression (87.5%)
-- Decision Tree (85.2%)
-- Neural Network (92.8%)
-- Random Forest (94.3%)
-- XGBoost (96.1%)
-- Voting Ensemble (97.8%)
+st.sidebar.header("About")
+st.sidebar.info("This application uses machine learning models to assess cardiovascular disease risk based on health metrics and lifestyle factors. Models Used: Logistic Regression (87.5%), Decision Tree (85.2%), Neural Network (92.8%), Random Forest (94.3%), XGBoost (96.1%), Voting Ensemble (97.8%). Disclaimer: This tool is for educational purposes only and should not replace professional medical advice.")
