@@ -624,8 +624,8 @@ st.markdown("""
     <div style='text-align: center; padding: 20px; color: white;'>
         <p style='font-size: 0.9rem;'>
             💙 <b>Cardio Care AI</b> - Your Personal Heart Health Assistant<br>
-            Powered by Advanced Machine Learning | Data Privacy Protected<br>
-            <i>Remember: This tool is for educational purposes. Always consult healthcare professionals for medical decisions.</i>
+    "Developed as part of MCA Final Year Project by Siddhika Belsare  Supervised by Prof. Shubhangi Mahadik"
         </p>
     </div>
 """, unsafe_allow_html=True)
+
