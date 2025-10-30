@@ -624,10 +624,9 @@ st.markdown("""
     <div style='text-align: center; padding: 20px; color: white;'>
         <p style='font-size: 0.9rem;'>
             💙 <b>Cardio Care Analyzer</b> - Your Personal Heart Health Assistant<br>
-           # ---------------- Footer ----------------
-st.markdown("---")
-st.markdown("Developed as part of **MCA Final Year Project** by **Siddhika Belsare**  \nSupervised by **Prof. Shubhangi Mahadik**")
+   Developed as part of MCA Final Year Project by  Siddhika Belsare  Supervised by Prof. Shubhangi Mahadik
         </p>
     </div>
 """, unsafe_allow_html=True)
+
 
