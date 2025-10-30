@@ -216,3 +216,7 @@ if submit_button:
 
 st.sidebar.header("About")
 st.sidebar.info("This application uses machine learning models to assess cardiovascular disease risk based on health metrics and lifestyle factors. Models Used: Logistic Regression (87.5%), Decision Tree (85.2%), Neural Network (92.8%), Random Forest (94.3%), XGBoost (96.1%), Voting Ensemble (97.8%). Disclaimer: This tool is for educational purposes only and should not replace professional medical advice.")
+
+# ---------------- Footer ----------------
+st.markdown("---")
+st.markdown("Developed as part of **MCA Final Year Project** by **Siddhika Belsare**  \nSupervised by **Prof. Shubhangi Mahadik**")
