@@ -5,7 +5,7 @@ import pandas as pd
 
 # ============== PAGE CONFIG ==============
 st.set_page_config(
-    page_title="Cardio Care Analyzer - Heart Health Analyzer",
+    page_title="Cardio Care AI - Heart Health Analyzer",
     page_icon="❤️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -44,6 +44,42 @@ st.markdown("""
         padding: 30px;
         border-radius: 20px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    /* Fix form labels - make them visible and bold */
+    .stForm label {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+    }
+    
+    /* Fix selectbox labels */
+    .stSelectbox label {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Fix number input labels */
+    .stNumberInput label {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Fix slider labels */
+    .stSlider label {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Tab labels */
+    .stTabs [data-baseweb="tab-list"] button {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Active tab */
+    .stTabs [data-baseweb="tab-list"] button[aria-selected="true"] {
+        color: #667eea !important;
     }
     
     /* Metric cards */
@@ -106,20 +142,21 @@ st.markdown("""
         box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
     
-    /* Sidebar styling */
-    .css-1d391kg {
-        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
-    }
-    
     /* Progress bar */
     .stProgress > div > div > div > div {
         background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    /* Section headers inside white background */
+    .stForm h3 {
+        color: #2c3e50 !important;
+        font-weight: bold !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
 # ============== HEADER ==============
-st.markdown('<h1 class="main-title">❤️ Cardio Care Analyzer </h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-title">❤️ Cardio Care AI</h1>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle">Advanced Heart Health Risk Assessment System</p>', unsafe_allow_html=True)
 
 # ============== MODEL ACCURACIES ==============
@@ -623,10 +660,9 @@ st.divider()
 st.markdown("""
     <div style='text-align: center; padding: 20px; color: white;'>
         <p style='font-size: 0.9rem;'>
-            💙 <b>Cardio Care Analyzer</b> - Your Personal Heart Health Assistant<br>
-    "Developed as part of MCA Final Year Project by Siddhika Belsare  Supervised by Prof. Shubhangi Mahadik"
+            💙 <b>Cardio Care AI</b> - Your Personal Heart Health Assistant<br>
+            Powered by Advanced Machine Learning | Data Privacy Protected<br>
+            <i>Remember: This tool is for educational purposes. Always consult healthcare professionals for medical decisions.</i>
         </p>
     </div>
 """, unsafe_allow_html=True)
-
-
